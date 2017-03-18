@@ -26,8 +26,16 @@ Hive 能把 HiveQL 转成 Map-Reduce 任务去查询数据。也就是说支持�
 ---------
 
 ### UDF
-- Hive UDF 中有哪几类函数，没类函数有什么特点。
+- Hive UDF 中有哪几类函数，每类函数有什么特点。如果按照函数的输入输出分的话
+> - UDAF： 多行记录，输出一个记录
+> - UDTF： 一行记录生成多行记录
+> - 普通的 UDF: 一行记录生成一行记录
+
 - Hive UDF 中如何创建自定义的 UDF。
 
+> - UDAF 对应 GenericUDAF 类
+> - UDTF 对应 GenericUDTF 类
+> - 普通的 UDF 对应 UDF 类
+> - 要定义某种 UDF 需要写一个相应类的子类，主要是重写 evaluate 方法。打包上传到 HDFS, 启动 Hive, 执行 add jar <pageckage_name.jar> 命令添加jar包。 执行 create function <function_name> as <class_name（就是你重写的 UDF 类）> 就会生成你要的 UDF 函数。
 
-
+- 我并不经常自定义 UDF, 在 extractjsonudf/ 目录中，你可以找到一个我之前写过的 UDF 的例子。
