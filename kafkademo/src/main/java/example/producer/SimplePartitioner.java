@@ -7,6 +7,7 @@ public class SimplePartitioner implements Partitioner {
 
     }
 
+    // according the key of message, give the message a partition id.
     public int partition(Object key, int a_numPartitions) {
         int partition = 0;
         String stringKey = (String) key;
